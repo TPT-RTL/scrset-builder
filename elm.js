@@ -8424,16 +8424,9 @@ var _user$project$SizeList$viewSize = function (size) {
 							[]))
 					])),
 				A2(
-				_elm_lang$html$Html$td,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html_App$map,
-						_user$project$Types$UpdateSizeWidth(size.id),
-						_user$project$WidthList$viewWidth(size.width))
-					])),
+				_elm_lang$html$Html_App$map,
+				_user$project$Types$UpdateSizeWidth(size.id),
+				_user$project$WidthList$viewWidth(size.width)),
 				A2(
 				_elm_lang$html$Html$td,
 				_elm_lang$core$Native_List.fromArray(
@@ -8752,6 +8745,123 @@ var _user$project$Main$update = F2(
 					{image: image});
 		}
 	});
+var _user$project$Main$viewComputedImageTag = function (model) {
+	var sizeAsString = function (size) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$Utils$formatMediaQuery(size),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(size.width.measure),
+					_user$project$Utils$unitToString(size.width.unit))));
+	};
+	var imageString = function (imageWidth) {
+		var imageHeight = _elm_lang$core$Basics$round(
+			(_elm_lang$core$Basics$toFloat(imageWidth) * 9) / 16);
+		var baseUrl = 'https://placehold.it/';
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			baseUrl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(imageWidth),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'x',
+					_elm_lang$core$Basics$toString(imageHeight))));
+	};
+	var widthAsString = function (width) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			imageString(width.measure),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(width.measure),
+					'w')));
+	};
+	var imageTag = A2(
+		_elm_lang$core$Basics_ops['++'],
+		'<img src=\"',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			imageString(1920),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'\" ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'srcset=\"',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(
+							_elm_lang$core$String$join,
+							', ',
+							A2(_elm_lang$core$List$map, widthAsString, model.image.widths)),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'\" ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'sizes=\"',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									A2(
+										_elm_lang$core$String$join,
+										', ',
+										A2(_elm_lang$core$List$map, sizeAsString, model.image.sizes)),
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										', 100vw',
+										A2(_elm_lang$core$Basics_ops['++'], '\" ', ' />'))))))))));
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h2,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('section-label-decorator')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('| ')
+							])),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Generated Image Tag')
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$textarea,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('generated-tag')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(imageTag)
+					]))
+			]));
+};
 var _user$project$Main$viewWidthResult = F3(
 	function (selectedSize, selectedWidth, width) {
 		var selected = _elm_lang$core$Native_Utils.eq(selectedWidth, width) ? A2(
@@ -9204,6 +9314,7 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
 							[
+								_elm_lang$html$Html_Attributes$class('env-input'),
 								_elm_lang$html$Html_Attributes$type$('range'),
 								_elm_lang$html$Html_Events$onInput(updateWidth),
 								_elm_lang$html$Html_Attributes$defaultValue(
@@ -9214,9 +9325,11 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 						_elm_lang$core$Native_List.fromArray(
 							[])),
 						A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$span,
 						_elm_lang$core$Native_List.fromArray(
-							[]),
+							[
+								_elm_lang$html$Html_Attributes$class('env-input-value')
+							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html$text(
@@ -9243,6 +9356,7 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
 							[
+								_elm_lang$html$Html_Attributes$class('env-input'),
 								_elm_lang$html$Html_Attributes$type$('range'),
 								_elm_lang$html$Html_Events$onInput(updateDensity),
 								_elm_lang$html$Html_Attributes$defaultValue(
@@ -9254,9 +9368,11 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 						_elm_lang$core$Native_List.fromArray(
 							[])),
 						A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$span,
 						_elm_lang$core$Native_List.fromArray(
-							[]),
+							[
+								_elm_lang$html$Html_Attributes$class('env-input-value')
+							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html$text(
@@ -9356,7 +9472,8 @@ var _user$project$Main$view = function (model) {
 									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_user$project$Main$viewComputedResult(model)
+										_user$project$Main$viewComputedResult(model),
+										_user$project$Main$viewComputedImageTag(model)
 									]))
 							]))
 					]))

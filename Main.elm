@@ -93,19 +93,21 @@ viewEnvironmentSettings env =
             , div [ class "env-input-wrapper section" ]
                 [ h3 [] [ text "Screen Width" ]
                 , input
-                    [ type' "range"
+                    [ class "env-input"
+                    , type' "range"
                     , onInput updateWidth
                     , defaultValue (toString env.width.measure)
                     , Html.Attributes.min "320"
                     , Html.Attributes.max "1920"
                     ]
                     []
-                , div [] [ text (toString env.width.measure) ]
+                , span [ class "env-input-value" ] [ text (toString env.width.measure) ]
                 ]
             , div [ class "env-input-wrapper section" ]
                 [ h3 [] [ text "Screen Density" ]
                 , input
-                    [ type' "range"
+                    [ class "env-input"
+                    , type' "range"
                     , onInput updateDensity
                     , defaultValue (toString env.density)
                     , Html.Attributes.min "0.5"
@@ -113,7 +115,7 @@ viewEnvironmentSettings env =
                     , step "0.5"
                     ]
                     []
-                , div [] [ text (toString env.density) ]
+                , span [ class "env-input-value" ] [ text (toString env.density) ]
                 ]
             ]
 
@@ -225,6 +227,53 @@ viewComputedResult model =
             ]
 
 
+viewComputedImageTag : Model -> Html Msg
+viewComputedImageTag model =
+    let
+        imageString imageWidth =
+            let
+                baseUrl =
+                    "https://placehold.it/"
+
+                imageHeight =
+                    round (Basics.toFloat imageWidth * 9 / 16)
+            in
+                baseUrl ++ (toString imageWidth) ++ "x" ++ (toString imageHeight)
+
+        widthAsString width =
+            imageString width.measure
+                ++ " "
+                ++ (toString width.measure)
+                ++ "w"
+
+        sizeAsString size =
+            (formatMediaQuery size)
+                ++ " "
+                ++ ((toString size.width.measure) ++ (unitToString size.width.unit))
+
+        imageTag =
+            "<img src=\""
+                ++ (imageString 1920)
+                ++ "\" "
+                ++ "srcset=\""
+                ++ (String.join ", ") (List.map widthAsString model.image.widths)
+                ++ "\" "
+                ++ "sizes=\""
+                ++ (String.join ", ") (List.map sizeAsString model.image.sizes)
+                ++ ", 100vw"
+                ++ "\" "
+                ++ " />"
+    in
+        div []
+            [ h2 []
+                [ span [ class "section-label-decorator" ]
+                    [ text "| " ]
+                , span [] [ text "Generated Image Tag" ]
+                ]
+            , textarea [ class "generated-tag" ] [ text imageTag ]
+            ]
+
+
 view : Model -> Html Msg
 view model =
     let
@@ -246,7 +295,10 @@ view model =
                 , tr [ class "section-row" ]
                     [ td [ class "result-label-wrapper section-label-wrapper" ]
                         [ span [ class "result-label section-label" ] [ text "Results" ] ]
-                    , td [] [ viewComputedResult model ]
+                    , td []
+                        [ viewComputedResult model
+                        , viewComputedImageTag model
+                        ]
                     ]
                 ]
             ]

@@ -192,7 +192,7 @@ viewSize size =
                     []
                 ]
               -- , td [] [ viewUnit size ]
-            , td [] [ (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width)) ]
+            , (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width))
             , td []
                 [ a
                     [ href "#", class "button" ]

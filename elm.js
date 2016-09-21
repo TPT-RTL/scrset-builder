@@ -8090,16 +8090,7 @@ var _user$project$WidthList$viewWidth = function (width) {
 						_elm_lang$core$Basics$toString(width.measure))
 					]),
 				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$span,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(
-						_user$project$Utils$unitToString(width.unit))
-					]))
+					[]))
 			]));
 };
 var _user$project$WidthList$viewRemoveableWidth = function (width) {
@@ -8129,7 +8120,7 @@ var _user$project$WidthList$viewRemoveableWidth = function (width) {
 							_elm_lang$html$Html$span,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html_Attributes$class('pure-button')
+									_elm_lang$html$Html_Attributes$class('button')
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
@@ -8150,7 +8141,7 @@ var _user$project$WidthList$view = function (widths) {
 		_elm_lang$html$Html$span,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('pure-button'),
+				_elm_lang$html$Html_Attributes$class('button'),
 				_elm_lang$html$Html_Events$onClick(_user$project$Types$AddWidth)
 			]),
 		_elm_lang$core$Native_List.fromArray(
@@ -8350,132 +8341,231 @@ var _user$project$SizeList$viewSize = function (size) {
 			_user$project$Utils$parseIntWithDefault(value));
 	};
 	return A2(
-		_elm_lang$html$Html$li,
+		_elm_lang$html$Html$tr,
 		_elm_lang$core$Native_List.fromArray(
 			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_user$project$SizeList$viewCondition(size),
 				A2(
-				_elm_lang$html$Html$input,
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Events$onInput(updateMesaure),
-						_elm_lang$html$Html_Attributes$defaultValue(
-						_elm_lang$core$Basics$toString(size.measure))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				_user$project$SizeList$viewUnit(size),
-				A2(
-				_elm_lang$html$Html_App$map,
-				_user$project$Types$UpdateSizeWidth(size.id),
-				_user$project$WidthList$viewWidth(size.width)),
-				A2(
-				_elm_lang$html$Html$a,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$href('#')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$span,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('pure-button')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(
-								_elm_lang$html$Html$i,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('fa fa-chevron-up')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[]))
-							]))
+						_user$project$SizeList$viewCondition(size)
 					])),
 				A2(
-				_elm_lang$html$Html$a,
+				_elm_lang$html$Html$td,
 				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$href('#')
-					]),
+					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$span,
+						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('pure-button')
+								_elm_lang$html$Html_Events$onInput(updateMesaure),
+								_elm_lang$html$Html_Attributes$defaultValue(
+								_elm_lang$core$Basics$toString(size.measure))
 							]),
 						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(
-								_elm_lang$html$Html$i,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('fa fa-chevron-down')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[]))
-							]))
+							[]))
 					])),
 				A2(
-				_elm_lang$html$Html$a,
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$href('#'),
-						_elm_lang$html$Html_Events$onClick($delete)
-					]),
+						_user$project$SizeList$viewUnit(size)
+					])),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$span,
+						_elm_lang$html$Html_App$map,
+						_user$project$Types$UpdateSizeWidth(size.id),
+						_user$project$WidthList$viewWidth(size.width))
+					])),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$a,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('pure-button')
+								_elm_lang$html$Html_Attributes$href('#'),
+								_elm_lang$html$Html_Attributes$class('button')
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
-								_elm_lang$html$Html$i,
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$class('fa fa-ban')
-									]),
+										A2(
+										_elm_lang$html$Html$i,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('fa fa-chevron-up')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[]))
+									]))
+							])),
+						A2(
+						_elm_lang$html$Html$a,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$href('#'),
+								_elm_lang$html$Html_Attributes$class('button')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$span,
 								_elm_lang$core$Native_List.fromArray(
-									[]))
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$i,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('fa fa-chevron-down')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[]))
+									]))
+							])),
+						A2(
+						_elm_lang$html$Html$a,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$href('#'),
+								_elm_lang$html$Html_Events$onClick($delete),
+								_elm_lang$html$Html_Attributes$class('button')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$i,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('fa fa-ban')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[]))
+									]))
 							]))
 					]))
 			]));
 };
 var _user$project$SizeList$view = function (sizes) {
 	var addButton = A2(
-		_elm_lang$html$Html$span,
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('pure-button'),
-				_elm_lang$html$Html_Events$onClick(_user$project$Types$AddSize)
-			]),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(_user$project$Types$AddSize),
+								_elm_lang$html$Html_Attributes$class('button')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Add Size')
+							]))
+					]))
+			]));
+	var header = A2(
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html$text('Add Size')
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Condition')
+					])),
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Width')
+					])),
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Unit')
+					])),
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Request Width')
+					])),
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('empty')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('')
+					]))
 			]));
 	var sizeElements = A2(_elm_lang$core$List$map, _user$project$SizeList$viewSize, sizes);
 	return A2(
-		_elm_lang$html$Html$ul,
+		_elm_lang$html$Html$table,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('pure-menu-list')
+				_elm_lang$html$Html_Attributes$class('input-table')
 			]),
 		A2(
 			_elm_lang$core$List$append,
-			sizeElements,
 			_elm_lang$core$Native_List.fromArray(
-				[addButton])));
+				[header]),
+			A2(
+				_elm_lang$core$List$append,
+				sizeElements,
+				_elm_lang$core$Native_List.fromArray(
+					[addButton]))));
 };
 var _user$project$SizeList$updateUnit = F2(
 	function (size, unit) {
@@ -8768,7 +8858,9 @@ var _user$project$Main$viewComputedResult = function (model) {
 						A2(
 						_elm_lang$html$Html$table,
 						_elm_lang$core$Native_List.fromArray(
-							[]),
+							[
+								_elm_lang$html$Html_Attributes$class('result-table ')
+							]),
 						A2(
 							_elm_lang$core$List$append,
 							_elm_lang$core$Native_List.fromArray(
@@ -8827,7 +8919,9 @@ var _user$project$Main$viewComputedResult = function (model) {
 						A2(
 						_elm_lang$html$Html$table,
 						_elm_lang$core$Native_List.fromArray(
-							[]),
+							[
+								_elm_lang$html$Html_Attributes$class('result-table ')
+							]),
 						A2(
 							_elm_lang$core$List$append,
 							_elm_lang$core$Native_List.fromArray(
@@ -8887,42 +8981,60 @@ var _user$project$Main$viewImageSettings = function (image) {
 						_elm_lang$html$Html$text('Image Settings')
 					])),
 				A2(
-				_elm_lang$html$Html$h3,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
+				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Image Candidates')
+						_elm_lang$html$Html_Attributes$class('section')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h3,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Image Candidates')
+							])),
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html_App$map,
+								_user$project$Types$UpdateWidthList,
+								_user$project$WidthList$view(image.widths))
+							]))
 					])),
 				A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
-					[]),
+					[
+						_elm_lang$html$Html_Attributes$class('section')
+					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html_App$map,
-						_user$project$Types$UpdateWidthList,
-						_user$project$WidthList$view(image.widths))
-					])),
-				A2(
-				_elm_lang$html$Html$h3,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Display Size Settings')
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
+						_elm_lang$html$Html$h3,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Display Size Settings')
+							])),
 						A2(
-						_elm_lang$html$Html_App$map,
-						_user$project$Types$UpdateSizeList,
-						_user$project$SizeList$view(image.sizes))
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html_App$map,
+								_user$project$Types$UpdateSizeList,
+								_user$project$SizeList$view(image.sizes))
+							]))
 					]))
 			]));
 };
@@ -8955,7 +9067,9 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
-			[]),
+			[
+				_elm_lang$html$Html_Attributes$class('env-settings')
+			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
@@ -8969,9 +9083,19 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 				A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
-					[]),
+					[
+						_elm_lang$html$Html_Attributes$class('env-input-wrapper section')
+					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
+						A2(
+						_elm_lang$html$Html$h3,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Screen Width')
+							])),
 						A2(
 						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
@@ -8984,18 +9108,32 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 								_elm_lang$html$Html_Attributes$max('1920')
 							]),
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text(
-								_elm_lang$core$Basics$toString(env.width.measure))
-							])),
+							[])),
 						A2(
-						_elm_lang$html$Html$span,
+						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html$text(
 								_elm_lang$core$Basics$toString(env.width.measure))
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('env-input-wrapper section')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h3,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Screen Density')
 							])),
 						A2(
 						_elm_lang$html$Html$input,
@@ -9012,7 +9150,7 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 						_elm_lang$core$Native_List.fromArray(
 							[])),
 						A2(
-						_elm_lang$html$Html$span,
+						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[]),
 						_elm_lang$core$Native_List.fromArray(
@@ -9032,13 +9170,92 @@ var _user$project$Main$view = function (model) {
 		_elm_lang$html$Html$form,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('pure-form')
+				_elm_lang$html$Html_Attributes$class('wrapper')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_user$project$Main$viewEnvironmentSettings(model.env),
-				_user$project$Main$viewImageSettings(model.image),
-				_user$project$Main$viewComputedResult(model)
+				A2(
+				_elm_lang$html$Html$table,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('main-table')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$tr,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('section-row')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$td,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('settings-label-wrapper section-label-wrapper')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$span,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('settings-label section-label')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text('Settings')
+											]))
+									])),
+								A2(
+								_elm_lang$html$Html$td,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_user$project$Main$viewEnvironmentSettings(model.env),
+										_user$project$Main$viewImageSettings(model.image)
+									]))
+							])),
+						A2(
+						_elm_lang$html$Html$tr,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('section-row')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$td,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('result-label-wrapper section-label-wrapper')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$span,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('result-label section-label')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text('Results')
+											]))
+									])),
+								A2(
+								_elm_lang$html$Html$td,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_user$project$Main$viewComputedResult(model)
+									]))
+							]))
+					]))
 			]));
 };
 var _user$project$Main$imageWidth = function (width) {

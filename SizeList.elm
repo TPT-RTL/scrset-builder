@@ -182,26 +182,28 @@ viewSize size =
         delete =
             DeleteSize size.id
     in
-        li []
-            [ viewCondition size
-            , input
-                [ onInput updateMesaure
-                , defaultValue (toString size.measure)
+        tr []
+            [ td [] [ viewCondition size ]
+            , td []
+                [ input
+                    [ onInput updateMesaure
+                    , defaultValue (toString size.measure)
+                    ]
+                    []
                 ]
-                []
-            , viewUnit size
-            , (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width))
-            , a
-                [ href "#" ]
-                [ span [ class "pure-button" ] [ i [ class "fa fa-chevron-up" ] [] ] ]
-            , a
-                [ href "#" ]
-                [ span [ class "pure-button" ] [ i [ class "fa fa-chevron-down" ] [] ] ]
-            , a
-                [ href "#"
-                , onClick delete
+            , td [] [ viewUnit size ]
+            , td [] [ (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width)) ]
+            , td []
+                [ a
+                    [ href "#", class "button" ]
+                    [ span [] [ i [ class "fa fa-chevron-up" ] [] ] ]
+                , a
+                    [ href "#", class "button" ]
+                    [ span [] [ i [ class "fa fa-chevron-down" ] [] ] ]
+                , a
+                    [ href "#", onClick delete, class "button" ]
+                    [ span [] [ i [ class "fa fa-ban" ] [] ] ]
                 ]
-                [ span [ class "pure-button" ] [ i [ class "fa fa-ban" ] [] ] ]
             ]
 
 
@@ -211,11 +213,22 @@ view sizes =
         sizeElements =
             List.map viewSize sizes
 
-        addButton =
-            span
-                [ class "pure-button"
-                , onClick AddSize
+        header =
+            tr []
+                [ th [] [ text "Condition" ]
+                , th [] [ text "Width" ]
+                , th [] [ text "Unit" ]
+                , th [] [ text "Request Width" ]
+                , th [ class "empty" ] [ text "" ]
                 ]
-                [ text "Add Size" ]
+
+        addButton =
+            tr []
+                [ td []
+                    [ span
+                        [ onClick AddSize, class "button" ]
+                        [ text "Add Size" ]
+                    ]
+                ]
     in
-        ul [ class "pure-menu-list" ] (List.append sizeElements [ addButton ])
+        table [ class "input-table" ] (List.append [ header ] (List.append sizeElements [ addButton ]))

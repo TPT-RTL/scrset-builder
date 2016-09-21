@@ -84,18 +84,22 @@ viewEnvironmentSettings env =
                 |> makeEnv env.width.measure
                 |> SetEnv
     in
-        div []
+        div [ class "env-settings" ]
             [ h2 [] [ text "Environment Settings" ]
-            , div []
-                [ input
+            , div [ class "env-input-wrapper section" ]
+                [ h3 [] [ text "Screen Width" ]
+                , input
                     [ type' "range"
                     , onInput updateWidth
                     , defaultValue (toString env.width.measure)
                     , Html.Attributes.min "320"
                     , Html.Attributes.max "1920"
                     ]
-                    [ text (toString env.width.measure) ]
-                , span [] [ text (toString env.width.measure) ]
+                    []
+                , div [] [ text (toString env.width.measure) ]
+                ]
+            , div [ class "env-input-wrapper section" ]
+                [ h3 [] [ text "Screen Density" ]
                 , input
                     [ type' "range"
                     , onInput updateDensity
@@ -105,7 +109,7 @@ viewEnvironmentSettings env =
                     , step "0.5"
                     ]
                     []
-                , span [] [ text (toString env.density) ]
+                , div [] [ text (toString env.density) ]
                 ]
             ]
 
@@ -116,12 +120,16 @@ viewImageSettings image =
         [ h2
             []
             [ text "Image Settings" ]
-        , h3 [] [ text "Image Candidates" ]
-        , div []
-            [ Html.map UpdateWidthList (WidthList.view image.widths) ]
-        , h3 [] [ text "Display Size Settings" ]
-        , div []
-            [ Html.map UpdateSizeList (SizeList.view image.sizes) ]
+        , div [ class "section" ]
+            [ h3 [] [ text "Image Candidates" ]
+            , div []
+                [ Html.map UpdateWidthList (WidthList.view image.widths) ]
+            ]
+        , div [ class "section" ]
+            [ h3 [] [ text "Display Size Settings" ]
+            , div []
+                [ Html.map UpdateSizeList (SizeList.view image.sizes) ]
+            ]
         ]
 
 
@@ -169,7 +177,7 @@ viewComputedResult model =
         div []
             [ div []
                 [ h2 [] [ text "Display Size Selection" ]
-                , table []
+                , table [ class "result-table " ]
                     (List.append
                         [ tr []
                             [ th [] [ text "Condition" ]
@@ -185,7 +193,7 @@ viewComputedResult model =
                 ]
             , div []
                 [ h2 [] [ text "Width Selection" ]
-                , table []
+                , table [ class "result-table " ]
                     (List.append
                         [ tr []
                             [ th [] [ text "Width" ]
@@ -210,10 +218,22 @@ view model =
                 |> parseIntWithDefault
                 |> makeImageWidth
     in
-        Html.form [ class "pure-form" ]
-            [ viewEnvironmentSettings model.env
-            , viewImageSettings model.image
-            , viewComputedResult model
+        Html.form [ class "wrapper" ]
+            [ table [ class "main-table" ]
+                [ tr [ class "section-row" ]
+                    [ td [ class "settings-label-wrapper section-label-wrapper" ]
+                        [ span [ class "settings-label section-label" ] [ text "Settings" ] ]
+                    , td []
+                        [ viewEnvironmentSettings model.env
+                        , viewImageSettings model.image
+                        ]
+                    ]
+                , tr [ class "section-row" ]
+                    [ td [ class "result-label-wrapper section-label-wrapper" ]
+                        [ span [ class "result-label section-label" ] [ text "Results" ] ]
+                    , td [] [ viewComputedResult model ]
+                    ]
+                ]
             ]
 
 

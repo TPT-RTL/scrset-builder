@@ -1,0 +1,123 @@
+/**
+* Colors
+* #30C5FF - active
+* #A9E190 - highlight
+* #F6E8EA - main
+* #FFA400 - alert
+* #2E2E3A - background
+**/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #2E2E3A;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  color: #F6E8EA;
+}
+
+.result-table th, .input-table th {
+  padding: 5px;
+  font-weight: 600;
+  background-color: #F6E8EA;
+  border: 5px solid #2E2E3A;
+  color: #2E2E3A;
+}
+
+.result-table th.empty, .input-table th.empty {
+  background-color: transparent;
+}
+
+.result-table td {
+  min-width: 200px;
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+input, select {
+  margin: 5px;
+  padding: 5px;
+  background-color: #2E2E3A;
+  border: 1px solid #F6E8EA;
+  border-radius: 0 !important;
+  transition: color 500ms, border-color 500ms;
+  -webkit-appearance: none;
+}
+
+input:hover, input:focus, select:hover, select:focus {
+  border-color: #A9E190;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.button {
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #2E2E3A;
+  border: 1px solid #F6E8EA;
+  color: #F6E8EA;
+  transition: color 500ms, border-color 500ms;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: #A9E190;
+}
+
+.main-table {
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
+.section-row:hover > .section-label-wrapper {
+  border-color: #30C5FF;
+}
+
+.section-label-wrapper {
+  border: 1px solid #F6E8EA;
+  vertical-align: middle;
+}
+
+.section-label {
+  transform: rotate(-90deg);
+  display: block;
+}
+
+.section:hover > h3 {
+  color: #30C5FF;
+}
+
+.env-settings {
+  width: 75%;
+  overflow: auto;
+}
+
+.env-input-wrapper {
+  float: left;
+  width: 50%;
+}
+
+.env-input-wrapper > h3 {
+  margin-top: 0;
+}
+
+.is-selected {
+  color: #A9E190;
+}

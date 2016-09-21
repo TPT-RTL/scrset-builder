@@ -125,7 +125,6 @@ viewWidth width =
             , defaultValue (toString width.measure)
             ]
             []
-        , span [] [ text (unitToString width.unit) ]
         ]
 
 
@@ -138,7 +137,7 @@ viewRemoveableWidth width =
                 [ href "#"
                 , onClick (DeleteWidth width.id)
                 ]
-                [ span [ class "pure-button" ] [ i [ class "fa fa-ban" ] [] ] ]
+                [ span [ class "button" ] [ i [ class "fa fa-ban" ] [] ] ]
             ]
         )
 
@@ -151,7 +150,7 @@ view widths =
 
         addButton =
             span
-                [ class "pure-button"
+                [ class "button"
                 , onClick AddWidth
                 ]
                 [ text "Add Width" ]

@@ -130,14 +130,30 @@ viewSizeResult selectedSize size =
     let
         selected =
             if (selectedSize == size) then
-                "Selected"
+                span [ class "is-selected" ] [ i [ class "fa fa-check" ] [] ]
             else
-                ""
+                span [] []
     in
         tr []
             [ td [] [ text (formatMediaQuery size) ]
             , td [] [ text ((toString size.width.measure) ++ (unitToString size.width.unit)) ]
-            , td [] [ text selected ]
+            , td [] [ selected ]
+            ]
+
+
+viewWidthResult : Size -> Width -> Width -> Html Msg
+viewWidthResult selectedSize selectedWidth width =
+    let
+        selected =
+            if (selectedWidth == width) then
+                span [ class "is-selected" ] [ i [ class "fa fa-check" ] [] ]
+            else
+                span [] []
+    in
+        tr []
+            [ td [] [ text (toString width.measure) ]
+            , td [] [ text (toString ((Basics.toFloat width.measure) / (Basics.toFloat selectedSize.measure))) ]
+            , td [] [ selected ]
             ]
 
 
@@ -145,7 +161,10 @@ viewComputedResult : Model -> Html Msg
 viewComputedResult model =
     let
         selectedSize =
-            findBestFit model.env.width model.image.sizes
+            findBestSize model.env.width model.image.sizes
+
+        selectedWidth =
+            findBestWidth selectedSize model.env.density model.image.widths
     in
         div []
             [ div []
@@ -161,6 +180,22 @@ viewComputedResult model =
                         (List.map
                             (viewSizeResult selectedSize)
                             model.image.sizes
+                        )
+                    )
+                ]
+            , div []
+                [ h2 [] [ text "Width Selection" ]
+                , table []
+                    (List.append
+                        [ tr []
+                            [ th [] [ text "Width" ]
+                            , th [] [ text "Ratio" ]
+                            , th [] [ text "Selected" ]
+                            ]
+                        ]
+                        (List.map
+                            (viewWidthResult selectedSize selectedWidth)
+                            model.image.widths
                         )
                     )
                 ]

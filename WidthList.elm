@@ -1,4 +1,4 @@
-module WidthList exposing (update, view, viewWidth, newWidth)
+module WidthList exposing (update, view, viewWidth, newWidth, findBestWidth)
 
 import Html exposing (..)
 import Html.App as Html
@@ -21,6 +21,57 @@ newWidth id =
     , measure = 0
     , unit = Pixel
     }
+
+
+findBestWidth : Size -> Float -> List Width -> Width
+findBestWidth size density widths =
+    let
+        toRatios size width =
+            { width = width, ratio = (toFloat width.measure) / (toFloat size.width.measure) }
+
+        withRatios =
+            List.map (toRatios size)
+
+        toDistanceFromDensity density widthWithRatio =
+            { width = widthWithRatio.width, ratio = widthWithRatio.ratio, distance = widthWithRatio.ratio - density }
+
+        withDensityDistance =
+            List.map (toDistanceFromDensity density)
+
+        chooseBestDistance dist1 dist2 =
+            if (dist1.distance >= 0 && dist2.distance < 0) then
+                dist1
+            else if (dist1.distance < 0 && dist2.distance >= 0) then
+                dist2
+            else if (dist1.distance < 0 && dist2.distance < 0) then
+                if (dist1.distance > dist2.distance) then
+                    dist1
+                else
+                    dist2
+            else if (dist1.distance < dist2.distance) then
+                dist1
+            else
+                dist2
+
+        widthOrDefault widthWithRatio =
+            case widthWithRatio of
+                Nothing ->
+                    { width = (newWidth 0), ratio = 1, distance = 0 }
+
+                Just widthLikeThing ->
+                    widthLikeThing
+
+        widthsWithDensities =
+            widths
+                |> (Debug.log "Raw Widths")
+                |> withRatios
+                |> withDensityDistance
+                |> (Debug.log "Widths with distances")
+    in
+        widthsWithDensities
+            |> List.foldl chooseBestDistance (widthOrDefault (List.head widthsWithDensities))
+            |> (Debug.log "Chosen width")
+            |> .width
 
 
 updateMeasure : Width -> Int -> Width

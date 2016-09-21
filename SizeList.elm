@@ -1,4 +1,4 @@
-module SizeList exposing (update, view, findBestFit)
+module SizeList exposing (update, view, findBestSize)
 
 import Html exposing (..)
 import Html.App as Html
@@ -29,8 +29,8 @@ newSize id =
     }
 
 
-findBestFit : Width -> List Size -> Size
-findBestFit width sizes =
+findBestSize : Width -> List Size -> Size
+findBestSize width sizes =
     let
         checkMinWidth size width =
             size.condition == MinWidth && size.measure <= width.measure
@@ -176,6 +176,12 @@ viewSize size =
                 []
             , viewUnit size
             , (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width))
+            , a
+                [ href "#" ]
+                [ span [ class "pure-button" ] [ i [ class "fa fa-chevron-up" ] [] ] ]
+            , a
+                [ href "#" ]
+                [ span [ class "pure-button" ] [ i [ class "fa fa-chevron-down" ] [] ] ]
             , a
                 [ href "#"
                 , onClick delete

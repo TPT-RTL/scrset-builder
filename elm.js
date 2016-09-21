@@ -8177,10 +8177,62 @@ var _user$project$WidthList$updateMeasure = F2(
 var _user$project$WidthList$newWidth = function (id) {
 	return {id: id, measure: 0, unit: _user$project$Types$Pixel};
 };
+var _user$project$WidthList$findBestWidth = F3(
+	function (size, density, widths) {
+		var widthOrDefault = function (widthWithRatio) {
+			var _p0 = widthWithRatio;
+			if (_p0.ctor === 'Nothing') {
+				return {
+					width: _user$project$WidthList$newWidth(0),
+					ratio: 1,
+					distance: 0
+				};
+			} else {
+				return _p0._0;
+			}
+		};
+		var chooseBestDistance = F2(
+			function (dist1, dist2) {
+				return ((_elm_lang$core$Native_Utils.cmp(dist1.distance, 0) > -1) && (_elm_lang$core$Native_Utils.cmp(dist2.distance, 0) < 0)) ? dist1 : (((_elm_lang$core$Native_Utils.cmp(dist1.distance, 0) < 0) && (_elm_lang$core$Native_Utils.cmp(dist2.distance, 0) > -1)) ? dist2 : (((_elm_lang$core$Native_Utils.cmp(dist1.distance, 0) < 0) && (_elm_lang$core$Native_Utils.cmp(dist2.distance, 0) < 0)) ? ((_elm_lang$core$Native_Utils.cmp(dist1.distance, dist2.distance) > 0) ? dist1 : dist2) : ((_elm_lang$core$Native_Utils.cmp(dist1.distance, dist2.distance) < 0) ? dist1 : dist2)));
+			});
+		var toDistanceFromDensity = F2(
+			function (density, widthWithRatio) {
+				return {width: widthWithRatio.width, ratio: widthWithRatio.ratio, distance: widthWithRatio.ratio - density};
+			});
+		var withDensityDistance = _elm_lang$core$List$map(
+			toDistanceFromDensity(density));
+		var toRatios = F2(
+			function (size, width) {
+				return {
+					width: width,
+					ratio: _elm_lang$core$Basics$toFloat(width.measure) / _elm_lang$core$Basics$toFloat(size.width.measure)
+				};
+			});
+		var withRatios = _elm_lang$core$List$map(
+			toRatios(size));
+		var widthsWithDensities = A2(
+			_elm_lang$core$Debug$log,
+			'Widths with distances',
+			withDensityDistance(
+				withRatios(
+					A2(_elm_lang$core$Debug$log, 'Raw Widths', widths))));
+		return function (_) {
+			return _.width;
+		}(
+			A2(
+				_elm_lang$core$Debug$log,
+				'Chosen width',
+				A3(
+					_elm_lang$core$List$foldl,
+					chooseBestDistance,
+					widthOrDefault(
+						_elm_lang$core$List$head(widthsWithDensities)),
+					widthsWithDensities)));
+	});
 var _user$project$WidthList$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
 			case 'AddWidth':
 				return A2(
 					_elm_lang$core$List$append,
@@ -8194,13 +8246,13 @@ var _user$project$WidthList$update = F2(
 				return A2(
 					_elm_lang$core$List$filter,
 					function (width) {
-						return !_elm_lang$core$Native_Utils.eq(width.id, _p0._0);
+						return !_elm_lang$core$Native_Utils.eq(width.id, _p1._0);
 					},
 					model);
 			default:
-				var updater = A2(_elm_lang$core$Basics$flip, _user$project$WidthList$updateMeasure, _p0._1);
+				var updater = A2(_elm_lang$core$Basics$flip, _user$project$WidthList$updateMeasure, _p1._1);
 				var filter = function (width) {
-					return _elm_lang$core$Native_Utils.eq(width.id, _p0._0);
+					return _elm_lang$core$Native_Utils.eq(width.id, _p1._0);
 				};
 				return A3(_user$project$Utils$updateIfFilter, updater, filter, model);
 		}
@@ -8320,6 +8372,58 @@ var _user$project$SizeList$viewSize = function (size) {
 				_elm_lang$html$Html$a,
 				_elm_lang$core$Native_List.fromArray(
 					[
+						_elm_lang$html$Html_Attributes$href('#')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('pure-button')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$i,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('fa fa-chevron-up')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[]))
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$a,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$href('#')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('pure-button')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$i,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('fa fa-chevron-down')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[]))
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$a,
+				_elm_lang$core$Native_List.fromArray(
+					[
 						_elm_lang$html$Html_Attributes$href('#'),
 						_elm_lang$html$Html_Events$onClick($delete)
 					]),
@@ -8397,7 +8501,7 @@ var _user$project$SizeList$newSize = function (id) {
 		width: _user$project$WidthList$newWidth(0)
 	};
 };
-var _user$project$SizeList$findBestFit = F2(
+var _user$project$SizeList$findBestSize = F2(
 	function (width, sizes) {
 		var checkMaxWidth = F2(
 			function (size, width) {
@@ -8509,9 +8613,87 @@ var _user$project$Main$update = F2(
 					{image: image});
 		}
 	});
+var _user$project$Main$viewWidthResult = F3(
+	function (selectedSize, selectedWidth, width) {
+		var selected = _elm_lang$core$Native_Utils.eq(selectedWidth, width) ? A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('is-selected')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$i,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('fa fa-check')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[]))
+				])) : A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+		return A2(
+			_elm_lang$html$Html$tr,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$td,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							_elm_lang$core$Basics$toString(width.measure))
+						])),
+					A2(
+					_elm_lang$html$Html$td,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							_elm_lang$core$Basics$toString(
+								_elm_lang$core$Basics$toFloat(width.measure) / _elm_lang$core$Basics$toFloat(selectedSize.measure)))
+						])),
+					A2(
+					_elm_lang$html$Html$td,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[selected]))
+				]));
+	});
 var _user$project$Main$viewSizeResult = F2(
 	function (selectedSize, size) {
-		var selected = _elm_lang$core$Native_Utils.eq(selectedSize, size) ? 'Selected' : '';
+		var selected = _elm_lang$core$Native_Utils.eq(selectedSize, size) ? A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('is-selected')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$i,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('fa fa-check')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[]))
+				])) : A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
 		return A2(
 			_elm_lang$html$Html$tr,
 			_elm_lang$core$Native_List.fromArray(
@@ -8544,13 +8726,12 @@ var _user$project$Main$viewSizeResult = F2(
 					_elm_lang$core$Native_List.fromArray(
 						[]),
 					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text(selected)
-						]))
+						[selected]))
 				]));
 	});
 var _user$project$Main$viewComputedResult = function (model) {
-	var selectedSize = A2(_user$project$SizeList$findBestFit, model.env.width, model.image.sizes);
+	var selectedSize = A2(_user$project$SizeList$findBestSize, model.env.width, model.image.sizes);
+	var selectedWidth = A3(_user$project$WidthList$findBestWidth, selectedSize, model.env.density, model.image.widths);
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8615,6 +8796,65 @@ var _user$project$Main$viewComputedResult = function (model) {
 								_elm_lang$core$List$map,
 								_user$project$Main$viewSizeResult(selectedSize),
 								model.image.sizes)))
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h2,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Width Selection')
+							])),
+						A2(
+						_elm_lang$html$Html$table,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						A2(
+							_elm_lang$core$List$append,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									A2(
+									_elm_lang$html$Html$tr,
+									_elm_lang$core$Native_List.fromArray(
+										[]),
+									_elm_lang$core$Native_List.fromArray(
+										[
+											A2(
+											_elm_lang$html$Html$th,
+											_elm_lang$core$Native_List.fromArray(
+												[]),
+											_elm_lang$core$Native_List.fromArray(
+												[
+													_elm_lang$html$Html$text('Width')
+												])),
+											A2(
+											_elm_lang$html$Html$th,
+											_elm_lang$core$Native_List.fromArray(
+												[]),
+											_elm_lang$core$Native_List.fromArray(
+												[
+													_elm_lang$html$Html$text('Ratio')
+												])),
+											A2(
+											_elm_lang$html$Html$th,
+											_elm_lang$core$Native_List.fromArray(
+												[]),
+											_elm_lang$core$Native_List.fromArray(
+												[
+													_elm_lang$html$Html$text('Selected')
+												]))
+										]))
+								]),
+							A2(
+								_elm_lang$core$List$map,
+								A2(_user$project$Main$viewWidthResult, selectedSize, selectedWidth),
+								model.image.widths)))
 					]))
 			]));
 };

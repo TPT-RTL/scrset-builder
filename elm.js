@@ -9387,93 +9387,129 @@ var _user$project$Main$view = function (model) {
 			_user$project$Utils$parseIntWithDefault(value));
 	};
 	return A2(
-		_elm_lang$html$Html$form,
+		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('wrapper')
+				_elm_lang$html$Html_Attributes$class('container')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
-				_elm_lang$html$Html$table,
+				_elm_lang$html$Html$h1,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('main-table')
+						_elm_lang$html$Html_Attributes$class('title')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$tr,
+						_elm_lang$html$Html$span,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('section-row')
+								_elm_lang$html$Html_Attributes$class('section-label-decorator')
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A2(
-								_elm_lang$html$Html$td,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('settings-label-wrapper section-label-wrapper')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										A2(
-										_elm_lang$html$Html$span,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('settings-label section-label')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Settings')
-											]))
-									])),
-								A2(
-								_elm_lang$html$Html$td,
-								_elm_lang$core$Native_List.fromArray(
-									[]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_user$project$Main$viewEnvironmentSettings(model.env),
-										_user$project$Main$viewImageSettings(model.image)
-									]))
+								_elm_lang$html$Html$text('| ')
 							])),
 						A2(
-						_elm_lang$html$Html$tr,
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('section-row')
+								_elm_lang$html$Html$text('Responsive Image Builder')
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$form,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('wrapper')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$table,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('main-table')
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
-								_elm_lang$html$Html$td,
+								_elm_lang$html$Html$tr,
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$class('result-label-wrapper section-label-wrapper')
+										_elm_lang$html$Html_Attributes$class('section-row')
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
 										A2(
-										_elm_lang$html$Html$span,
+										_elm_lang$html$Html$td,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('result-label section-label')
+												_elm_lang$html$Html_Attributes$class('settings-label-wrapper section-label-wrapper')
 											]),
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html$text('Results')
+												A2(
+												_elm_lang$html$Html$span,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('settings-label section-label')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('Settings')
+													]))
+											])),
+										A2(
+										_elm_lang$html$Html$td,
+										_elm_lang$core$Native_List.fromArray(
+											[]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_user$project$Main$viewEnvironmentSettings(model.env),
+												_user$project$Main$viewImageSettings(model.image)
 											]))
 									])),
 								A2(
-								_elm_lang$html$Html$td,
-								_elm_lang$core$Native_List.fromArray(
-									[]),
+								_elm_lang$html$Html$tr,
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_user$project$Main$viewComputedResult(model),
-										_user$project$Main$viewComputedImageTag(model)
+										_elm_lang$html$Html_Attributes$class('section-row')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$td,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('result-label-wrapper section-label-wrapper')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												A2(
+												_elm_lang$html$Html$span,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('result-label section-label')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('Results')
+													]))
+											])),
+										A2(
+										_elm_lang$html$Html$td,
+										_elm_lang$core$Native_List.fromArray(
+											[]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_user$project$Main$viewComputedResult(model),
+												_user$project$Main$viewComputedImageTag(model)
+											]))
 									]))
 							]))
 					]))

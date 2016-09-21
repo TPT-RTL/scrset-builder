@@ -282,22 +282,29 @@ view model =
                 |> parseIntWithDefault
                 |> makeImageWidth
     in
-        Html.form [ class "wrapper" ]
-            [ table [ class "main-table" ]
-                [ tr [ class "section-row" ]
-                    [ td [ class "settings-label-wrapper section-label-wrapper" ]
-                        [ span [ class "settings-label section-label" ] [ text "Settings" ] ]
-                    , td []
-                        [ viewEnvironmentSettings model.env
-                        , viewImageSettings model.image
+        div [ class "container" ]
+            [ h1 [ class "title" ]
+                [ span [ class "section-label-decorator" ]
+                    [ text "| " ]
+                , span [] [ text "Responsive Image Builder" ]
+                ]
+            , Html.form [ class "wrapper" ]
+                [ table [ class "main-table" ]
+                    [ tr [ class "section-row" ]
+                        [ td [ class "settings-label-wrapper section-label-wrapper" ]
+                            [ span [ class "settings-label section-label" ] [ text "Settings" ] ]
+                        , td []
+                            [ viewEnvironmentSettings model.env
+                            , viewImageSettings model.image
+                            ]
                         ]
-                    ]
-                , tr [ class "section-row" ]
-                    [ td [ class "result-label-wrapper section-label-wrapper" ]
-                        [ span [ class "result-label section-label" ] [ text "Results" ] ]
-                    , td []
-                        [ viewComputedResult model
-                        , viewComputedImageTag model
+                    , tr [ class "section-row" ]
+                        [ td [ class "result-label-wrapper section-label-wrapper" ]
+                            [ span [ class "result-label section-label" ] [ text "Results" ] ]
+                        , td []
+                            [ viewComputedResult model
+                            , viewComputedImageTag model
+                            ]
                         ]
                     ]
                 ]

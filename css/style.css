@@ -79,10 +79,11 @@ input:hover, input:focus, select:hover, select:focus {
 
 .button:hover {
   border-color: #A9E190;
+  color: #FFA400;
 }
 
 .main-table {
-  border-spacing: 10px;
+  border-spacing: 15px 20px;
   border-collapse: separate;
 }
 
@@ -90,8 +91,13 @@ input:hover, input:focus, select:hover, select:focus {
   border-color: #30C5FF;
 }
 
+.section-row:hover .section-label {
+  color: #FFA400;
+}
+
 .section-label-wrapper {
   border: 1px solid #F6E8EA;
+  border-width: 0 1px 0 0;
   vertical-align: middle;
 }
 
@@ -100,8 +106,12 @@ input:hover, input:focus, select:hover, select:focus {
   display: block;
 }
 
+.section-label-decorator {
+  color: #A9E190;
+}
+
 .section:hover > h3 {
-  color: #30C5FF;
+  color: #FFA400;
 }
 
 .env-settings {

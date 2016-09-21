@@ -191,7 +191,7 @@ viewSize size =
                     ]
                     []
                 ]
-            , td [] [ viewUnit size ]
+              -- , td [] [ viewUnit size ]
             , td [] [ (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width)) ]
             , td []
                 [ a
@@ -216,9 +216,9 @@ view sizes =
         header =
             tr []
                 [ th [] [ text "Condition" ]
-                , th [] [ text "Width" ]
-                , th [] [ text "Unit" ]
-                , th [] [ text "Request Width" ]
+                , th [] [ text "Condition Width" ]
+                  -- , th [] [ text "Unit" ]
+                , th [] [ text "Render Width" ]
                 , th [ class "empty" ] [ text "" ]
                 ]
 

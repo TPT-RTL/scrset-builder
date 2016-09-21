@@ -8070,7 +8070,7 @@ var _user$project$Utils$parseFloatWithDefault = function (value) {
 
 var _user$project$WidthList$viewWidth = function (width) {
 	return A2(
-		_elm_lang$html$Html$span,
+		_elm_lang$html$Html$td,
 		_elm_lang$core$Native_List.fromArray(
 			[]),
 		_elm_lang$core$Native_List.fromArray(
@@ -8095,7 +8095,7 @@ var _user$project$WidthList$viewWidth = function (width) {
 };
 var _user$project$WidthList$viewRemoveableWidth = function (width) {
 	return A2(
-		_elm_lang$html$Html$li,
+		_elm_lang$html$Html$tr,
 		_elm_lang$core$Native_List.fromArray(
 			[]),
 		A2(
@@ -8107,57 +8107,109 @@ var _user$project$WidthList$viewRemoveableWidth = function (width) {
 			_elm_lang$core$Native_List.fromArray(
 				[
 					A2(
-					_elm_lang$html$Html$a,
+					_elm_lang$html$Html$td,
 					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$href('#'),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Types$DeleteWidth(width.id))
-						]),
+						[]),
 					_elm_lang$core$Native_List.fromArray(
 						[
 							A2(
-							_elm_lang$html$Html$span,
+							_elm_lang$html$Html$a,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html_Attributes$class('button')
+									_elm_lang$html$Html_Attributes$href('#'),
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Types$DeleteWidth(width.id))
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
 									A2(
-									_elm_lang$html$Html$i,
+									_elm_lang$html$Html$span,
 									_elm_lang$core$Native_List.fromArray(
 										[
-											_elm_lang$html$Html_Attributes$class('fa fa-ban')
+											_elm_lang$html$Html_Attributes$class('button')
 										]),
 									_elm_lang$core$Native_List.fromArray(
-										[]))
+										[
+											A2(
+											_elm_lang$html$Html$i,
+											_elm_lang$core$Native_List.fromArray(
+												[
+													_elm_lang$html$Html_Attributes$class('fa fa-ban')
+												]),
+											_elm_lang$core$Native_List.fromArray(
+												[]))
+										]))
 								]))
 						]))
 				])));
 };
 var _user$project$WidthList$view = function (widths) {
 	var addButton = A2(
-		_elm_lang$html$Html$span,
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('button'),
-				_elm_lang$html$Html_Events$onClick(_user$project$Types$AddWidth)
-			]),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('button'),
+								_elm_lang$html$Html_Events$onClick(_user$project$Types$AddWidth)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Add Width')
+							]))
+					]))
+			]));
+	var header = A2(
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html$text('Add Width')
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Width')
+					])),
+				A2(
+				_elm_lang$html$Html$th,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('empty')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('')
+					]))
 			]));
 	var widthViewList = A2(_elm_lang$core$List$map, _user$project$WidthList$viewRemoveableWidth, widths);
 	return A2(
-		_elm_lang$html$Html$ul,
+		_elm_lang$html$Html$table,
 		_elm_lang$core$Native_List.fromArray(
-			[]),
+			[
+				_elm_lang$html$Html_Attributes$class('input-table')
+			]),
 		A2(
 			_elm_lang$core$List$append,
-			widthViewList,
 			_elm_lang$core$Native_List.fromArray(
-				[addButton])));
+				[header]),
+			A2(
+				_elm_lang$core$List$append,
+				widthViewList,
+				_elm_lang$core$Native_List.fromArray(
+					[addButton]))));
 };
 var _user$project$WidthList$updateMeasure = F2(
 	function (width, measure) {
@@ -8377,14 +8429,6 @@ var _user$project$SizeList$viewSize = function (size) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_user$project$SizeList$viewUnit(size)
-					])),
-				A2(
-				_elm_lang$html$Html$td,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
 						A2(
 						_elm_lang$html$Html_App$map,
 						_user$project$Types$UpdateSizeWidth(size.id),
@@ -8521,7 +8565,7 @@ var _user$project$SizeList$view = function (sizes) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Width')
+						_elm_lang$html$Html$text('Condition Width')
 					])),
 				A2(
 				_elm_lang$html$Html$th,
@@ -8529,15 +8573,7 @@ var _user$project$SizeList$view = function (sizes) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Unit')
-					])),
-				A2(
-				_elm_lang$html$Html$th,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Request Width')
+						_elm_lang$html$Html$text('Render Width')
 					])),
 				A2(
 				_elm_lang$html$Html$th,
@@ -8853,7 +8889,24 @@ var _user$project$Main$viewComputedResult = function (model) {
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text('Display Size Selection')
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('section-label-decorator')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('| ')
+									])),
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Display Size Selection')
+									]))
 							])),
 						A2(
 						_elm_lang$html$Html$table,
@@ -8914,7 +8967,24 @@ var _user$project$Main$viewComputedResult = function (model) {
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text('Width Selection')
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('section-label-decorator')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('| ')
+									])),
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Width Selection')
+									]))
 							])),
 						A2(
 						_elm_lang$html$Html$table,
@@ -8978,7 +9048,24 @@ var _user$project$Main$viewImageSettings = function (image) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Image Settings')
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('section-label-decorator')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('| ')
+							])),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Image Settings')
+							]))
 					])),
 				A2(
 				_elm_lang$html$Html$div,
@@ -9078,7 +9165,24 @@ var _user$project$Main$viewEnvironmentSettings = function (env) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Environment Settings')
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('section-label-decorator')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('| ')
+							])),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Environment Settings')
+							]))
 					])),
 				A2(
 				_elm_lang$html$Html$div,

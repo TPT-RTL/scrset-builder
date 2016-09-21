@@ -119,7 +119,7 @@ update msg model =
 
 viewWidth : Width -> Html WidthMsg
 viewWidth width =
-    span []
+    td []
         [ input
             [ onInput (\value -> (UpdateWidthMeasure width.id) (parseIntWithDefault value))
             , defaultValue (toString width.measure)
@@ -130,14 +130,16 @@ viewWidth width =
 
 viewRemoveableWidth : Width -> Html WidthMsg
 viewRemoveableWidth width =
-    li []
+    tr []
         (List.append
             [ viewWidth width ]
-            [ a
-                [ href "#"
-                , onClick (DeleteWidth width.id)
+            [ td []
+                [ a
+                    [ href "#"
+                    , onClick (DeleteWidth width.id)
+                    ]
+                    [ span [ class "button" ] [ i [ class "fa fa-ban" ] [] ] ]
                 ]
-                [ span [ class "button" ] [ i [ class "fa fa-ban" ] [] ] ]
             ]
         )
 
@@ -148,11 +150,21 @@ view widths =
         widthViewList =
             List.map viewRemoveableWidth widths
 
-        addButton =
-            span
-                [ class "button"
-                , onClick AddWidth
+        header =
+            tr []
+                [ th [] [ text "Width" ]
+                , th [ class "empty" ] [ text "" ]
                 ]
-                [ text "Add Width" ]
+
+        addButton =
+            tr []
+                [ td []
+                    [ span
+                        [ class "button"
+                        , onClick AddWidth
+                        ]
+                        [ text "Add Width" ]
+                    ]
+                ]
     in
-        ul [] (List.append widthViewList [ addButton ])
+        table [ class "input-table" ] (List.append [ header ] (List.append widthViewList [ addButton ]))

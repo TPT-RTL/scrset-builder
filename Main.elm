@@ -85,7 +85,11 @@ viewEnvironmentSettings env =
                 |> SetEnv
     in
         div [ class "env-settings" ]
-            [ h2 [] [ text "Environment Settings" ]
+            [ h2 []
+                [ span [ class "section-label-decorator" ]
+                    [ text "| " ]
+                , span [] [ text "Environment Settings" ]
+                ]
             , div [ class "env-input-wrapper section" ]
                 [ h3 [] [ text "Screen Width" ]
                 , input
@@ -119,7 +123,10 @@ viewImageSettings image =
     div []
         [ h2
             []
-            [ text "Image Settings" ]
+            [ span [ class "section-label-decorator" ]
+                [ text "| " ]
+            , span [] [ text "Image Settings" ]
+            ]
         , div [ class "section" ]
             [ h3 [] [ text "Image Candidates" ]
             , div []
@@ -176,7 +183,11 @@ viewComputedResult model =
     in
         div []
             [ div []
-                [ h2 [] [ text "Display Size Selection" ]
+                [ h2 []
+                    [ span [ class "section-label-decorator" ]
+                        [ text "| " ]
+                    , span [] [ text "Display Size Selection" ]
+                    ]
                 , table [ class "result-table " ]
                     (List.append
                         [ tr []
@@ -192,7 +203,11 @@ viewComputedResult model =
                     )
                 ]
             , div []
-                [ h2 [] [ text "Width Selection" ]
+                [ h2 []
+                    [ span [ class "section-label-decorator" ]
+                        [ text "| " ]
+                    , span [] [ text "Width Selection" ]
+                    ]
                 , table [ class "result-table " ]
                     (List.append
                         [ tr []

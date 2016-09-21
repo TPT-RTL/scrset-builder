@@ -63,15 +63,18 @@ findBestWidth size density widths =
 
         widthsWithDensities =
             widths
-                |> (Debug.log "Raw Widths")
-                |> withRatios
+                -- |> (Debug.log "Raw Widths")
+                |>
+                    withRatios
                 |> withDensityDistance
-                |> (Debug.log "Widths with distances")
+
+        -- |> (Debug.log "Widths with distances")
     in
         widthsWithDensities
             |> List.foldl chooseBestDistance (widthOrDefault (List.head widthsWithDensities))
-            |> (Debug.log "Chosen width")
-            |> .width
+            -- |> (Debug.log "Chosen width")
+            |>
+                .width
 
 
 updateMeasure : Width -> Int -> Width
@@ -83,7 +86,22 @@ update : WidthMsg -> List Width -> List Width
 update msg model =
     case msg of
         AddWidth ->
-            List.append model [ newWidth ((length model) + 1) ]
+            let
+                lastWidth =
+                    model
+                        |> List.reverse
+                        |> List.head
+
+                newModel =
+                    case lastWidth of
+                        Just width ->
+                            [ newWidth (width.id + 1) ]
+
+                        Nothing ->
+                            [ newWidth ((length model) + 1) ]
+            in
+                newModel
+                    |> (List.append model)
 
         DeleteWidth id ->
             List.filter (\width -> width.id /= id) model

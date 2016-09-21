@@ -8210,38 +8210,41 @@ var _user$project$WidthList$findBestWidth = F3(
 			});
 		var withRatios = _elm_lang$core$List$map(
 			toRatios(size));
-		var widthsWithDensities = A2(
-			_elm_lang$core$Debug$log,
-			'Widths with distances',
-			withDensityDistance(
-				withRatios(
-					A2(_elm_lang$core$Debug$log, 'Raw Widths', widths))));
+		var widthsWithDensities = withDensityDistance(
+			withRatios(widths));
 		return function (_) {
 			return _.width;
 		}(
-			A2(
-				_elm_lang$core$Debug$log,
-				'Chosen width',
-				A3(
-					_elm_lang$core$List$foldl,
-					chooseBestDistance,
-					widthOrDefault(
-						_elm_lang$core$List$head(widthsWithDensities)),
-					widthsWithDensities)));
+			A3(
+				_elm_lang$core$List$foldl,
+				chooseBestDistance,
+				widthOrDefault(
+					_elm_lang$core$List$head(widthsWithDensities)),
+				widthsWithDensities));
 	});
 var _user$project$WidthList$update = F2(
 	function (msg, model) {
 		var _p1 = msg;
 		switch (_p1.ctor) {
 			case 'AddWidth':
-				return A2(
-					_elm_lang$core$List$append,
-					model,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$WidthList$newWidth(
-							_elm_lang$core$List$length(model) + 1)
-						]));
+				var lastWidth = _elm_lang$core$List$head(
+					_elm_lang$core$List$reverse(model));
+				var newModel = function () {
+					var _p2 = lastWidth;
+					if (_p2.ctor === 'Just') {
+						return _elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$WidthList$newWidth(_p2._0.id + 1)
+							]);
+					} else {
+						return _elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$WidthList$newWidth(
+								_elm_lang$core$List$length(model) + 1)
+							]);
+					}
+				}();
+				return A2(_elm_lang$core$List$append, model, newModel);
 			case 'DeleteWidth':
 				return A2(
 					_elm_lang$core$List$filter,
@@ -8527,14 +8530,24 @@ var _user$project$SizeList$update = F2(
 		var _p0 = msg;
 		switch (_p0.ctor) {
 			case 'AddSize':
-				return A2(
-					_elm_lang$core$List$append,
-					model,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$SizeList$newSize(
-							_elm_lang$core$List$length(model) + 1)
-						]));
+				var lastSize = _elm_lang$core$List$head(
+					_elm_lang$core$List$reverse(model));
+				var newModel = function () {
+					var _p1 = lastSize;
+					if (_p1.ctor === 'Just') {
+						return _elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$SizeList$newSize(_p1._0.id + 1)
+							]);
+					} else {
+						return _elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$SizeList$newSize(
+								_elm_lang$core$List$length(model) + 1)
+							]);
+					}
+				}();
+				return A2(_elm_lang$core$List$append, model, newModel);
 			case 'DeleteSize':
 				return A2(
 					_elm_lang$core$List$filter,

@@ -64,7 +64,22 @@ update : SizeMsg -> List Size -> List Size
 update msg model =
     case msg of
         AddSize ->
-            List.append model [ newSize ((length model) + 1) ]
+            let
+                lastSize =
+                    model
+                        |> List.reverse
+                        |> List.head
+
+                newModel =
+                    case lastSize of
+                        Just size ->
+                            [ newSize (size.id + 1) ]
+
+                        Nothing ->
+                            [ newSize ((length model) + 1) ]
+            in
+                newModel
+                    |> (List.append model)
 
         DeleteSize id ->
             List.filter (\size -> size.id /= id) model

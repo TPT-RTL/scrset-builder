@@ -65,21 +65,24 @@ update msg model =
     case msg of
         AddSize ->
             let
-                lastSize =
-                    model
-                        |> List.reverse
-                        |> List.head
-
-                newModel =
-                    case lastSize of
-                        Just size ->
-                            [ newSize (size.id + 1) ]
-
-                        Nothing ->
-                            [ newSize ((length model) + 1) ]
+                maxId =
+                    foldl Basics.max 0 (List.map .id model)
             in
-                newModel
+                [ newSize (maxId + 1) ]
                     |> (List.append model)
+
+        MoveSize size oldPosition newPosition ->
+            let
+                listWithoutModel =
+                    List.append (take oldPosition model) (drop (oldPosition + 1) model)
+
+                left =
+                    take newPosition listWithoutModel
+
+                right =
+                    drop newPosition listWithoutModel
+            in
+                List.append left (size :: right)
 
         DeleteSize id ->
             List.filter (\size -> size.id /= id) model
@@ -171,13 +174,19 @@ viewUnit size =
             (List.map unitOption [ Pixel, ViewWidth, Percent ])
 
 
-viewSize : Size -> Html SizeMsg
-viewSize size =
+viewSize : Int -> Size -> Html SizeMsg
+viewSize position size =
     let
         updateMesaure value =
             value
                 |> parseIntWithDefault
                 |> UpdateSizeMeasure size.id
+
+        moveUp =
+            MoveSize size position (Basics.max 0 (position - 1))
+
+        moveDown =
+            MoveSize size position (position + 1)
 
         delete =
             DeleteSize size.id
@@ -187,21 +196,22 @@ viewSize size =
             , td []
                 [ input
                     [ onInput updateMesaure
+                    , value (toString size.measure)
                     , defaultValue (toString size.measure)
                     ]
                     []
                 ]
               -- , td [] [ viewUnit size ]
-            , (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width))
+            , (Html.map (UpdateSizeWidth size.id) (WidthList.viewWidth size.width.id size.width))
             , td []
                 [ a
-                    [ href "#", class "button" ]
+                    [ href "#", class "button", onClickControl moveUp ]
                     [ span [] [ i [ class "fa fa-chevron-up" ] [] ] ]
                 , a
-                    [ href "#", class "button" ]
+                    [ href "#", class "button", onClickControl moveDown ]
                     [ span [] [ i [ class "fa fa-chevron-down" ] [] ] ]
                 , a
-                    [ href "#", onClick delete, class "button" ]
+                    [ href "#", class "button", onClickControl delete ]
                     [ span [] [ i [ class "fa fa-ban" ] [] ] ]
                 ]
             ]
@@ -211,7 +221,7 @@ view : List Size -> Html SizeMsg
 view sizes =
     let
         sizeElements =
-            List.map viewSize sizes
+            List.map2 viewSize [0..((length sizes) - 1)] sizes
 
         header =
             tr []

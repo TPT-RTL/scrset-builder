@@ -3,7 +3,8 @@ module WidthList exposing (update, view, viewWidth, newWidth, findBestWidth)
 import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onInput, onBlur, targetValue)
+import Html.Events exposing (onClick, onInput, onBlur, targetValue, onWithOptions)
+import Json.Decode as Json
 import List exposing (..)
 import Types exposing (..)
 import Utils exposing (..)
@@ -103,6 +104,19 @@ update msg model =
                 newModel
                     |> (List.append model)
 
+        MoveWidth width oldPosition newPosition ->
+            let
+                listWithoutModel =
+                    List.append (take oldPosition model) (drop (oldPosition + 1) model)
+
+                left =
+                    take newPosition listWithoutModel
+
+                right =
+                    drop newPosition listWithoutModel
+            in
+                List.append left (width :: right)
+
         DeleteWidth id ->
             List.filter (\width -> width.id /= id) model
 
@@ -117,38 +131,50 @@ update msg model =
                 updateIfFilter updater filter model
 
 
-viewWidth : Width -> Html WidthMsg
-viewWidth width =
+viewWidth : Int -> Width -> Html WidthMsg
+viewWidth position width =
     td []
         [ input
             [ onInput (\value -> (UpdateWidthMeasure width.id) (parseIntWithDefault value))
+            , value (toString width.measure)
             , defaultValue (toString width.measure)
             ]
             []
         ]
 
 
-viewRemoveableWidth : Width -> Html WidthMsg
-viewRemoveableWidth width =
-    tr []
-        (List.append
-            [ viewWidth width ]
-            [ td []
-                [ a
-                    [ href "#"
-                    , onClick (DeleteWidth width.id)
+viewRemoveableWidth : Int -> Width -> Html WidthMsg
+viewRemoveableWidth position width =
+    let
+        moveUp =
+            MoveWidth width position (Basics.max 0 (position - 1))
+
+        moveDown =
+            MoveWidth width position (position + 1)
+    in
+        tr []
+            (List.append
+                [ viewWidth position width ]
+                [ td []
+                    [ a
+                        [ href "#", class "button", onClickControl moveUp ]
+                        [ span [] [ i [ class "fa fa-chevron-up" ] [] ] ]
+                    , a
+                        [ href "#", class "button", onClickControl moveDown ]
+                        [ span [] [ i [ class "fa fa-chevron-down" ] [] ] ]
+                    , a
+                        [ href "#", class "button", onClickControl (DeleteWidth width.id) ]
+                        [ span [] [ i [ class "fa fa-ban" ] [] ] ]
                     ]
-                    [ span [ class "button" ] [ i [ class "fa fa-ban" ] [] ] ]
                 ]
-            ]
-        )
+            )
 
 
 view : List Width -> Html WidthMsg
 view widths =
     let
         widthViewList =
-            List.map viewRemoveableWidth widths
+            List.map2 viewRemoveableWidth [0..((length widths) - 1)] widths
 
         header =
             tr []

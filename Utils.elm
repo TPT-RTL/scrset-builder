@@ -2,7 +2,7 @@ module Utils exposing (..)
 
 import Html exposing (..)
 import String exposing (..)
-import Html.Events exposing (onClick, onInput, onBlur, targetValue)
+import Html.Events exposing (onClick, onInput, onBlur, onWithOptions, targetValue)
 import Json.Decode as Json
 import Types exposing (..)
 
@@ -91,6 +91,10 @@ onChange tagger =
 onBlur : (String -> b) -> Attribute b
 onBlur tagger =
     Html.Events.on "blur" (Json.map tagger targetValue)
+
+
+onClickControl tagger =
+    onWithOptions "click" { preventDefault = True, stopPropagation = False } (Json.succeed tagger)
 
 
 updateIfFilter : (b -> b) -> (b -> Bool) -> List b -> List b

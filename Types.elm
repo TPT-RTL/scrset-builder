@@ -22,12 +22,14 @@ type Condition
 
 type WidthMsg
     = AddWidth
+    | MoveWidth Width Int Int
     | DeleteWidth Int
     | UpdateWidthMeasure Int Int
 
 
 type SizeMsg
     = AddSize
+    | MoveSize Size Int Int
     | DeleteSize Int
     | UpdateSizeCondition Int Condition
     | UpdateSizeMeasure Int Int
